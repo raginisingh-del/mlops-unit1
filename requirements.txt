@@ -1,0 +1,4 @@
+1.made a file named train.py
+2. pip install pandas scikit-learn
+3.python train.py
+4. commit the code to github
