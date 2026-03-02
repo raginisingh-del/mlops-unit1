@@ -14,3 +14,6 @@ print(df.describe())
 # 4. Optional: Print the first 5 rows to verify data
 print("\n--- First 5 Rows ---")
 print(df.head())
+
+print("\n--- Dataset Shape ---")
+print(df.shape)
