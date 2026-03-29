@@ -7,3 +7,6 @@
 
 --Excerise 2
 1.joblib 
+
+Excercuse 6:
+1.scikit-learn
