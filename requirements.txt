@@ -1,4 +1,9 @@
+--Excersise 1
 1.made a file named train.py
 2. pip install pandas scikit-learn
 3.python train.py
 4. commit the code to github
+5.newbranch experiment-v1 and then merged with main branch
+
+--Excerise 2
+1.joblib 

@@ -1,19 +1,35 @@
+import mlflow
+import mlflow.sklearn
+
 from sklearn.datasets import load_iris
-import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import joblib
 
-# 1. Load the dataset
+# Load dataset
 iris = load_iris()
+X = iris.data
+y = iris.target
 
-# 2. Convert to a DataFrame for easier statistics
-df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+mlflow.set_experiment("Iris_Classification")
 
-# 3. Print basic statistics (Requirement 2)
-print("--- Iris Dataset Statistics ---")
-print(df.describe())
+with mlflow.start_run():
+    max_iter = 200
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
 
-# 4. Optional: Print the first 5 rows to verify data
-print("\n--- First 5 Rows ---")
-print(df.head())
+    model = LogisticRegression(max_iter=max_iter)
+    model.fit(X_train, y_train)
 
-print("\n--- Dataset Shape ---")
-print(df.shape)
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+
+    mlflow.log_param("max_iter", max_iter)
+
+    mlflow.log_metric("accuracy", accuracy)
+
+    mlflow.sklearn.log_model(model, "model")
+
+    print(f"Accuracy: {accuracy}")
